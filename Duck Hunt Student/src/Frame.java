@@ -21,14 +21,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	Teacher teacher = new Teacher();
 	Clouds cloud = new Clouds();
 	Butt butt = new Butt();
-	Dog dog = new Dog();
+	Justin2 justin2 = new Justin2();
+	Justin3 justin3 = new Justin3();
 	public void paint(Graphics g) {
 		cloud.paint(g);
 		g1.paint(g);
 		teacher.paint(g);
 		justin.paint(g);
 		butt.paint(g);
-		dog.paint(g);
+		justin2.paint(g);
+		justin3.paint(g);
 	}
 	
 	Music bang = new Music("cyka.wav",false);

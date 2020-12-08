@@ -8,13 +8,13 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Justin implements MouseListener{
+public class Justin2 implements MouseListener{
 	private int x = (int)(Math.random()*700-0)+100, y = (int)(Math.random()*400-0)+100;
 	private int vx, vy;
 	private Image img; // image of the frog
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
-	public Justin() {
+	public Justin2() {
 		img = getImage("faces.png"); //load the image for Tree
 		init(x, y); 				//initialize the location of the image
 		vy = (int)(Math.random()*(7-4)-4);
@@ -67,21 +67,6 @@ public class Justin implements MouseListener{
 		return false;
 	}
 	
-	
-	public boolean miss(int mX, int mY) {
-		Rectangle a = new Rectangle(x,y,200,200);
-		int counter = 0;
-		while(counter <= 3){
-			
-			if(!a.contains(mX,mY)) {
-				counter++;
-			}
-		}
-		while(counter > 3) {
-			Teacher.moveUp(x,y);
-		}
-		return false;
-	}
 	public void reset() {
 		x = (int)(Math.random()*800)+100;
 		y = 450;
