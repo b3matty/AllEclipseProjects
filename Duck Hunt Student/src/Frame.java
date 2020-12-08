@@ -81,6 +81,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 		
 		//send mouse x and y to the duck object's collision mode
 		justin.collided(x, y);	
+		teacher.moveUp(x,y);
 	}
 
 	@Override

@@ -78,7 +78,7 @@ public class Justin implements MouseListener{
 			}
 		}
 		while(counter > 3) {
-			Teacher.moveUp(x,y);
+			
 		}
 		return false;
 	}
