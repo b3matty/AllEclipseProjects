@@ -59,7 +59,7 @@ public class Justin3 implements MouseListener{
 			System.out.println("ouch");
 			bang.play();
 		}
-		else if(a1.contains(mX,mY)) {
+		else if(!a.contains(mX,mY)) {
 			Music bab = new Music("bab.wav",false);
 			System.out.println("you missed");
 			bab.play();

@@ -8,14 +8,17 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
+
+
 public class Justin implements MouseListener{
 	private int x = (int)(Math.random()*700-0)+100, y = (int)(Math.random()*400-0)+100;
 	private int vx, vy;
 	private Image img; // image of the frog
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
-
+	Teacher teacher = new Teacher();
+	
 	public Justin() {
-		img = getImage("faces.png"); //load the image for Tree
+		img = getImage("faces.png"); //load the image for justins face
 		init(x, y); 				//initialize the location of the image
 		vy = (int)(Math.random()*(7-4)-4);
 		vx = (int)(Math.random()*(7-4)+3);
@@ -27,14 +30,14 @@ public class Justin implements MouseListener{
 	public void paint(Graphics g) {
 		
 		Graphics2D g2 = (Graphics2D) g;
-		y+=vy;
+		y+=vy; 
 		x+=vx;
 		
-		if(x < -50) {
+		if(x < -50) { //velocity changes directions when hitting left side of screen
 			x = -50;
 			vx *=-1;
 		}
-		if(x > 750) {
+		if(x > 750) { //changes directions when hitting right side of screen
 			x = 750;
 			vx *=-1;
 		}
@@ -42,24 +45,38 @@ public class Justin implements MouseListener{
 		tx.setToTranslation(x,y);
 		g2.drawImage(img, tx, null);   
 		
+		//when justin passes top of screen he resets back to a random 
+		//starting location at the bottom of the screen
 		if(y < -250) {
 			x = (int)(Math.random()*700-0)+100;
 			y = (int)(Math.random()*300-0)+100;
 		}
+		
+		
 	}
 	
 
 	public boolean collided(int mX, int mY) {
-		System.out.println(mX+":"+mY);
+		System.out.println(mX+":"+mY); //prints coordinates of mouse clicks in console
 		
+		//hitbox for when you hit justin
 		Rectangle a = new Rectangle(x,y,200,200);
-		Rectangle a1 = new Rectangle(0,0,1000,1000);
-		if(a.contains(mX,mY)) {
-			Music bang = new Music("cyka.wav",false);
-			System.out.println("ouch");
+		
+		
+		if(a.contains(mX,mY)) { //if your mouse click coords are in hitbox play bang sound
+			Music bang = new Music("ck2.wav",false); 
+			System.out.println("ouch"); //prints ouch when conditions met
 			bang.play();
+			x = (int)(Math.random()*800)+100; //resets justin when hit
+			y = 450;
+			if(Math.random()<.4) { //randomizes x velocity
+				vx = -3;
+			}
+			else {
+				vx = 3;
+			}
 		}
-		else if(a1.contains(mX,mY)) {
+		else if(!a.contains(mX,mY)) { //if shot misses hitbox play bababooey sfx
 			Music bab = new Music("bab.wav",false);
 			System.out.println("you missed");
 			bab.play();
@@ -67,38 +84,27 @@ public class Justin implements MouseListener{
 		return false;
 	}
 	
-	
-	public boolean miss(int mX, int mY) {
-		Rectangle a = new Rectangle(x,y,200,200);
-		int counter = 0;
-		while(counter <= 3){
-			
-			if(!a.contains(mX,mY)) {
-				counter++;
-			}
-		}
-		while(counter > 3) {
-			
-		}
-		return false;
-	}
-	public void reset() {
-		x = (int)(Math.random()*800)+100;
-		y = 450;
-		if(Math.random()<.4) {
-			vx = -3;
-		}
-		else {
-			vx = 3;
-		}
-	}
-	
-	
-	public void update() {
+	//intention was to make cristian appear after 3 misses
 		
-	}
+		public boolean miss(int mX, int mY) {
+			Rectangle a = new Rectangle(x,y,200,200);
+			int counter = 0;
+			while(counter <= 3){
+				
+				if(!a.contains(mX,mY)) {
+					counter++;
+				}
+			}
+			if(counter > 3) {
+				
+				teacher.setDogP(650, 320);
+				tx.setToTranslation(x,y);
+				return true;
+			}
+			return false;
+		}
 	
-	
+
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
@@ -136,7 +142,7 @@ public class Justin implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("ouch");
+		
 	}
 
 	@Override

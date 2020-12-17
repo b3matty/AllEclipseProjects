@@ -7,13 +7,13 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Teacher {
-	private int  x = 650,y = -500; //320
-	private Image img1; // image of the frog
+	private int  x = 650,y = 320; 
+	private Image img1; 
 	private Image img2;
 	private Image img;
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 	
-	Justin justin = new Justin();
+	
 	public Teacher() {
 		img1 = getImage("teacher.png"); //load the image for Tree
 		img2 = getImage("teacher2.png");
@@ -27,6 +27,7 @@ public class Teacher {
 		Graphics2D g2 = (Graphics2D) g;
 		double x = (Math.random());
 		
+		//around half the time first cristian appears, then half the time second image shows
 		if(x<.5) {
 			img = img1;
 			}
@@ -49,13 +50,32 @@ public class Teacher {
 		g2.drawImage(img, tx, null);   
 	}
 	
-	
-	public void moveUp(int x, int y) {
-		if(!justin.collided(x,y)) {
-			y += 820;
-		}
+	void setDogP(int dx, int dy) {
+		x = dx;
+		y = dy;
+		tx.setToTranslation(x,y);
 	}
-	private void init(double a, double b) {
+	
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	
+	
+	private 	void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}

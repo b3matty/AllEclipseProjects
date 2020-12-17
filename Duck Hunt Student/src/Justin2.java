@@ -59,7 +59,8 @@ public class Justin2 implements MouseListener{
 			System.out.println("ouch");
 			bang.play();
 		}
-		else if(a1.contains(mX,mY)) {
+		//&& justin.collided(x,y)==false ??
+		else if(!a.contains(mX,mY)) {
 			Music bab = new Music("bab.wav",false);
 			System.out.println("you missed");
 			bab.play();
